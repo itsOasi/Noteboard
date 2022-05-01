@@ -1,14 +1,19 @@
 mod engine;
-use std::collections::HashMap;
-use engine::{control, model::Model};
+use engine::{control, model::Model, view::draw};
 
 fn main() {
-    let name = control::console::prompt("enter name: ");
-    let width = control::console::prompt("enter width: ").trim().parse::<usize>().unwrap();
-    let height = control::console::prompt("enter height: ").trim().parse::<usize>().unwrap();
+    let name = control::terminal::prompt("enter name: ");
+    let width = control::terminal::prompt("enter width: ").trim().parse::<usize>().unwrap();
+    let height = control::terminal::prompt("enter height: ").trim().parse::<usize>().unwrap();
 
-    let clear_color = (0, 0, 0);
-    let mut model = Model::new(name, width, height, clear_color);
+    // creates model
+    let mut model = Model::new(name, width, height, None);
+    
+    // creates visual and adds it to model
+    let vis = draw::Visual::new(draw::DrawMode::Rect(40, 40), (50, 50), (200, 50, 50));
+    model.add_visual(vis);
+    
+    // runs model
     model.run();
     
 }

@@ -1,17 +1,22 @@
-use super::view::{self, Context};
+use super::view::{self, context::Context, draw::Visual};
 
 pub struct Model{
     name: String,
     width: usize,
     height: usize,
     clear_color: (u8, u8, u8),
-    buffer: Vec<u32>
+    visuals: Vec<Visual>,
 }
 
 impl Model {
-    pub fn new(name: String, width: usize, height: usize, clear_color:(u8, u8, u8) )->Model{
-        
-        Model{name, width, height, clear_color, buffer: vec![view::pixels::color_to_buf(clear_color); width * height]}
+    pub fn new(name: String, width: usize, height: usize, clear_color:Option<(u8, u8, u8)> )->Model{
+        Model{
+            name, 
+            width, 
+            height, 
+            clear_color: clear_color.unwrap_or((0,0,0)), 
+            visuals: Vec::new()
+        }
     }
 
     // continuously iterates over data and changes state accordingly
@@ -23,8 +28,11 @@ impl Model {
 
         let mut window = context.window();
         while window.is_open(){
-            self.buffer = view::pixels::clear_buf(color, width, height);
-            view::Context::update(&mut window, &self.buffer, width, height);
-        }    
+            view::context::update(&mut window, &mut self.visuals, width, height, None);
+        }
+    }
+
+    pub fn add_visual(&mut self, vis: Visual){
+        self.visuals.push(vis);
     }
 }

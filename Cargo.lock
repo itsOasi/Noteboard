@@ -274,14 +274,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "minifb_test"
-version = "0.1.0"
-dependencies = [
- "minifb",
- "rasterize",
-]
-
-[[package]]
 name = "minimal-lexical"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -318,6 +310,14 @@ checksum = "a8903e5a29a317527874d0402f867152a3d21c908bb0b933e416c65e301d4c36"
 dependencies = [
  "memchr",
  "minimal-lexical",
+]
+
+[[package]]
+name = "noteboard"
+version = "0.1.0"
+dependencies = [
+ "minifb",
+ "rasterize",
 ]
 
 [[package]]

@@ -1,5 +1,5 @@
 [package]
-name = "minifb_test"
+name = "noteboard"
 version = "0.1.0"
 edition = "2021"
 
